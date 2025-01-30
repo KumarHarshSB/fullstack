@@ -1,20 +1,20 @@
-CREATE TABLE Employees (
+CREATE TABLE EMPLOYEE (
    id INT PRIMARY KEY,
    name VARCHAR(255),
    email VARCHAR(255)
 );
 
-CREATE TABLE Departments (
-     id INT PRIMARY KEY,
+CREATE TABLE DEPARTMENT (
+     id INT AUTO_INCREMENT PRIMARY KEY ,
      name VARCHAR(255),
      read_only BOOLEAN NOT NULL,
      mandatory BOOLEAN NOT NULL
 );
 
-CREATE TABLE Map_Employees_Departments (
+CREATE TABLE MAP_EMPLOYEE_DEPARTMENT (
     employee_id INT,
     department_id INT,
     PRIMARY KEY (employee_id, department_id),
-    FOREIGN KEY (employee_id) REFERENCES Employees(id) ON DELETE CASCADE,
-    FOREIGN KEY (department_id) REFERENCES Departments(id) ON DELETE CASCADE
+    FOREIGN KEY (employee_id) REFERENCES EMPLOYEE(id) ON DELETE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES DEPARTMENT (id) ON DELETE CASCADE
 );

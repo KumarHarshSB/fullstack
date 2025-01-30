@@ -1,0 +1,1 @@
+INSERT INTO DEPARTMENT (name,read_only,mandatory) VALUES ('Organisation',TRUE,TRUE);
