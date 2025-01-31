@@ -17,12 +17,12 @@ import java.util.Set;
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Department {
     @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Boolean readOnly;
     private Boolean mandatory;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {  CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "departmentList")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {  CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "departmentList")
     private Set<Employee> employeeList = new HashSet<>();
 }

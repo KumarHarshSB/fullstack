@@ -19,6 +19,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department createDepartment(Department department){
+        if(department.getName() == null  || department.getName().trim().isEmpty())
+        {
+            log.warn("Department name can not be null or empty.");
+            throw new IllegalArgumentException("Department name is required.");
+        }
         return departmentRepository.save(department);
     }
 
@@ -29,12 +34,19 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department updateDepartment(Department department){
+        if(department.getName() == null  || department.getName().trim().isEmpty())
+        {
+            log.warn("Department name can not be made null or empty.");
+            throw new IllegalArgumentException("Department name is required.");
+        }
+
         Department old  = departmentRepository.findById(department.getId()).get();
         old.setName(department.getName());
         old.setReadOnly(department.getReadOnly());
         old.setMandatory(department.getMandatory());
         for(Employee e: department.getEmployeeList())
             old.getEmployeeList().add(e);
+
         return departmentRepository.save(old);
     }
 
@@ -43,7 +55,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department dep = departmentRepository.findById(depId).get();
         if(dep.getReadOnly()){
             log.warn("Read Only department can not be deleted");
-            return;
+            throw new UnsupportedOperationException("Deletion not allowed: Department is read-only.");
         }
         log.info("Department deleted successfully.");
         departmentRepository.deleteById(depId);

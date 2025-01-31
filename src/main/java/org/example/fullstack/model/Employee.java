@@ -22,7 +22,7 @@ public class Employee {
     private String name;
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "MAP_EMPLOYEE_DEPARTMENT",
             joinColumns = @JoinColumn(name = "employeeId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "departmentId", referencedColumnName = "id"))
