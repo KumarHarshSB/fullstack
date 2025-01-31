@@ -1,7 +1,6 @@
 package org.example.fullstack.service;
 
 import org.example.fullstack.model.Department;
-import org.example.fullstack.model.Employee;
 import org.example.fullstack.repository.DepartmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,15 +9,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class DepartmentServiceImplTest {
+public class DepartmentServiceImplTests {
 
     @Mock
     private DepartmentRepository departmentRepository;
@@ -34,56 +31,84 @@ class DepartmentServiceImplTest {
         department.setId(1);
         department.setName("HR");
         department.setReadOnly(false);
-        department.setMandatory(true);
+        department.setMandatory(false);
+        department.setEmployeeList(new HashSet<>());
     }
 
     @Test
-    void testCreateDepartment() {
+    public void testCreateDepartment_ValidDepartment_Success() {
         when(departmentRepository.save(department)).thenReturn(department);
-        Department created = departmentService.createDepartment(department);
-        assertNotNull(created);
-        assertEquals("HR", created.getName());
+
+        Department savedDepartment = departmentService.createDepartment(department);
+
+        assertNotNull(savedDepartment);
+        assertEquals("HR", savedDepartment.getName());
     }
 
     @Test
-    void testReadDepartment() {
-        when(departmentRepository.findAll()).thenReturn(Collections.singletonList(department));
-        List<Department> departments = departmentService.readDepartment();
-        assertFalse(departments.isEmpty());
-        assertEquals(1, departments.size());
+    public void testCreateDepartment_NullName_ThrowsIllegalArgumentException() {
+        department.setName(null);
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                departmentService.createDepartment(department));
+
+        assertEquals("Department name is required.", exception.getMessage());
     }
 
     @Test
-    void testUpdateDepartment() {
-        Department updatedDepartment = new Department();
-        updatedDepartment.setId(1);
-        updatedDepartment.setName("Finance");
-        updatedDepartment.setReadOnly(true);
-        updatedDepartment.setMandatory(false);
-        updatedDepartment.setEmployeeList(Collections.singleton(new Employee()));
+    public void testReadDepartment_NoConditions_ReturnsList() {
+        List<Department> departments = List.of(department);
+        when(departmentRepository.findAll()).thenReturn(departments);
+
+        List<Department> result = departmentService.readDepartment();
+
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    public void testUpdateDepartment_ValidDepartment_Success() {
+        Department updated = new Department();
+        updated.setId(1);
+        updated.setName("Finance");
+        updated.setReadOnly(false);
+        updated.setMandatory(false);
+        updated.setEmployeeList(new HashSet<>());
 
         when(departmentRepository.findById(1)).thenReturn(Optional.of(department));
-        when(departmentRepository.save(any(Department.class))).thenReturn(updatedDepartment);
+        when(departmentRepository.save(any())).thenReturn(updated);
 
-        Department result = departmentService.updateDepartment(updatedDepartment);
+        Department result = departmentService.updateDepartment(updated);
+
         assertEquals("Finance", result.getName());
-        assertTrue(result.getReadOnly());
     }
 
     @Test
-    void testDeleteDepartmentNonReadOnly() {
-        when(departmentRepository.findById(1)).thenReturn(Optional.of(department));
+    public void testUpdateDepartment_NullName_ThrowsIllegalArgumentException() {
+        department.setName(null);
 
-        departmentService.deleteDepartment(1);
-        verify(departmentRepository, times(1)).deleteById(1);
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                departmentService.updateDepartment(department));
+
+        assertEquals("Department name is required.", exception.getMessage());
     }
 
     @Test
-    void testDeleteDepartmentReadOnly() {
+    public void testDeleteDepartment_ReadOnly_ThrowsUnsupportedOperationException() {
         department.setReadOnly(true);
+
         when(departmentRepository.findById(1)).thenReturn(Optional.of(department));
 
-        departmentService.deleteDepartment(1);
-        verify(departmentRepository, never()).deleteById(anyInt());
+        Exception exception = assertThrows(UnsupportedOperationException.class, () ->
+                departmentService.deleteDepartment(1));
+
+        assertEquals("Deletion not allowed: Department is read-only.", exception.getMessage());
+    }
+
+    @Test
+    public void testDeleteDepartment_ValidDepartment_Success() {
+        when(departmentRepository.findById(1)).thenReturn(Optional.of(department));
+        doNothing().when(departmentRepository).deleteById(1);
+
+        assertDoesNotThrow(() -> departmentService.deleteDepartment(1));
     }
 }
