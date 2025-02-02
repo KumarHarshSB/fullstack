@@ -1,0 +1,21 @@
+<h2>Department List</h2>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Read Only</th>
+    <th>Mandatory</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let department of departments">
+    <td>{{department.name}}</td>
+    <td>{{department.readOnly}}</td>
+    <td>{{department.mandatory}}</td>
+    <td>
+      <button (click) = "deleteDepartment(department.id!)" class="btn btn-danger">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

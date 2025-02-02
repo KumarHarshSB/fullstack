@@ -27,9 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException("Employee name is required.");
         }
 
-        List<Department> departments = departmentRepository.findAllByMandatoryTrue();
-        for(Department d : departments)
-            employee.getDepartmentList().add(d);
+//        List<Department> departments = departmentRepository.findAllByMandatoryTrue();
+//        for(Department d : departments)
+//            employee.getDepartmentList().add(d);
 
         return employeeRepository.save(employee);
     }

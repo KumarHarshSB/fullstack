@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <ul class="navbar-dark">
+    <li class="nav-item">
+      <a routerLink="employee" routerLinkActive="active" class="nav-link">Employee List</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="create-employee" class="nav-link">Add Employee</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="department" class="nav-link">Department List</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="create-department" class="nav-link">Create Department</a>
+    </li>
+  </ul>
+</nav>
+
+<h1 class="text-center">{{ title }}</h1>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span>All Rights Reserved 2025</span>
+  </div>
+</footer>
