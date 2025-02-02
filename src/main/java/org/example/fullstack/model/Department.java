@@ -23,6 +23,6 @@ public class Department {
     private Boolean readOnly;
     private Boolean mandatory;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {  CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "departmentList")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departmentList")
     private Set<Employee> employeeList = new HashSet<>();
 }

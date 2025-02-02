@@ -12,7 +12,6 @@ import {Department} from "../department";
 export class CreateEmployeeComponent implements OnInit{
 
   employee: Employee = {
-    id: undefined,
     name: '',
     email: '',
     departmentList: []
@@ -26,20 +25,14 @@ export class CreateEmployeeComponent implements OnInit{
     this.employeeService.getDepartmentList().subscribe(
       data => {
         this.departments = data;
+        console.log('department:', data);
       },
       (error: any) => console.log(error)
     );
   }
 
-  // saveEmployee(){
-  //   this.employeeService.createEmployee(this.employee).subscribe(data =>{
-  //     console.log(data);
-  //     this.goToEmployeeList();
-  //   },
-  //     error => console.log(error));
-  // }
-
   saveEmployee() {
+    console.log('saving employee: ',this.employee.departmentList);
     const employeeData = {
       name: this.employee.name,
       email: this.employee.email,
@@ -65,7 +58,7 @@ export class CreateEmployeeComponent implements OnInit{
   }
 
   onSubmit(){
-    console.log(this.employee);
+    console.log('submit', this.employee.departmentList);
     this.saveEmployee();
   }
 }

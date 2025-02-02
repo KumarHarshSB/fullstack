@@ -1,8 +1,8 @@
 import {Department} from "./department";
 
-export class Employee {
-  id: number | undefined;
-  name: string | undefined;
-  email: string | undefined;
-  departmentList: Department[] | undefined;
+export interface Employee {
+  id?: number;
+  name: string;
+  email: string;
+  departmentList: Department[];
 }

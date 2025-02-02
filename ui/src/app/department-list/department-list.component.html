@@ -14,7 +14,7 @@
     <td>{{department.readOnly}}</td>
     <td>{{department.mandatory}}</td>
     <td>
-      <button (click) = "deleteDepartment(department.id!)" class="btn btn-danger">Delete</button>
+      <button [disabled]="department.readOnly" (click) = "deleteDepartment(department.id!)" class="btn btn-danger">Delete</button>
     </td>
   </tr>
   </tbody>
