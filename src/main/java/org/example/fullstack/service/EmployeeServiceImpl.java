@@ -7,7 +7,9 @@ import org.example.fullstack.repository.DepartmentRepository;
 import org.example.fullstack.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -27,9 +29,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException("Employee name is required.");
         }
 
-//        List<Department> departments = departmentRepository.findAllByMandatoryTrue();
-//        for(Department d : departments)
-//            employee.getDepartmentList().add(d);
+        Set<Department> attachedDepartments = new HashSet<>();
+        for (Department dept : employee.getDepartmentList()) {
+            Department existingDept = (Department) departmentRepository.findByName(dept.getName())
+                    .orElseThrow(() -> new RuntimeException("Department not found: " + dept.getName()));
+            attachedDepartments.add(existingDept);
+        }
+
+        employee.setDepartmentList(attachedDepartments);
 
         return employeeRepository.save(employee);
     }
@@ -46,13 +53,18 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException("Employee name is required.");
         }
 
-        Employee old  = employeeRepository.findById(employee.getId()).get();
+        Employee old  = employeeRepository.findById(employee.getId()).orElseThrow(
+                () -> new RuntimeException("Employee not found"));
+
         old.setName(employee.getName());
         old.setEmail(employee.getEmail());
-        old.getDepartmentList().clear();
-        for(Department d: employee.getDepartmentList())
-            old.getDepartmentList().add(d);
 
+        Set<Department> updatedDepartments = new HashSet<>();
+        for (Department dept : employee.getDepartmentList()) {
+            Department existingDept = (Department) departmentRepository.findByName(dept.getName())
+                    .orElseThrow(() -> new RuntimeException("Department not found: " + dept.getName()));
+            updatedDepartments.add(existingDept);
+        }
         return employeeRepository.save(old);
     }
 
