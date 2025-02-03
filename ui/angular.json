@@ -25,7 +25,7 @@
               "src/assets"
             ],
             "styles": [
-Bootstrap Setup              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "/home/kumarharsh/fullstack/ui/node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],

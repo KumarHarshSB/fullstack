@@ -11,6 +11,7 @@ import { DepartmentListComponent } from './department-list/department-list.compo
 import { CreateDepartmentComponent } from './create-department/create-department.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { UpdateDepartmentComponent } from './update-department/update-department.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,10 @@ import { UpdateDepartmentComponent } from './update-department/update-department
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
+  entryComponents: [UpdateDepartmentComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

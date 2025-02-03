@@ -14,7 +14,8 @@
     <td>{{department.readOnly}}</td>
     <td>{{department.mandatory}}</td>
     <td>
-      <button (click) = "updateDepartment(department)" class="btn btn-info">Update</button>
+<!--      <button (click) = "updateDepartment(department)" class="btn btn-info">Update</button>-->
+      <button (click)="openUpdateModal(department)" class="btn btn-info">Update</button>
     </td>
     <td>
       <button [disabled]="department.readOnly" (click) = "deleteDepartment(department.id!)" class="btn btn-danger">Delete</button>
