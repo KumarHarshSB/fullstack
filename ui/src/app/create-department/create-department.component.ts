@@ -24,7 +24,6 @@ export class CreateDepartmentComponent implements OnInit{
 
   saveDepartment(){
     this.departmentService.createDepartment(this.department).subscribe(data =>{
-        console.log(data);
         this.goToDepartmentList();
       },
       error => console.log(error));
@@ -35,7 +34,6 @@ export class CreateDepartmentComponent implements OnInit{
   }
 
   onSubmit(){
-    console.log(this.department);
     this.saveDepartment();
   }
 }
