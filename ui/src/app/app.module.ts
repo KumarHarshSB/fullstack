@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import { DepartmentListComponent } from './department-list/department-list.component';
 import { CreateDepartmentComponent } from './create-department/create-department.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+import { UpdateDepartmentComponent } from './update-department/update-department.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UpdateEmployeeComponent } from './update-employee/update-employee.compo
     CreateEmployeeComponent,
     DepartmentListComponent,
     CreateDepartmentComponent,
-    UpdateEmployeeComponent
+    UpdateEmployeeComponent,
+    UpdateDepartmentComponent
   ],
   imports: [
     BrowserModule,

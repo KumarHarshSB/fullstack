@@ -5,6 +5,7 @@ import {CreateEmployeeComponent} from "./create-employee/create-employee.compone
 import {DepartmentListComponent} from "./department-list/department-list.component";
 import {CreateDepartmentComponent} from "./create-department/create-department.component";
 import {UpdateEmployeeComponent} from "./update-employee/update-employee.component";
+import {UpdateDepartmentComponent} from "./update-department/update-department.component";
 
 const routes: Routes = [
   {path:'employee',component: EmployeeListComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'department',component: DepartmentListComponent},
   {path:'create-department',component: CreateDepartmentComponent},
   {path:'update-employee',component: UpdateEmployeeComponent},
+  {path:'update-department',component: UpdateDepartmentComponent},
   {path:'',redirectTo:'employee',pathMatch:'full'}
 ];
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Department} from "./department";
+import {Employee} from "./employee";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class DepartmentService {
 
   createDepartment(department: Department): Observable<Object>{
     return this.httpClient.post(`${this.departmentBaseURL}`,department);
+  }
+
+  updateDepartment(department: Department): Observable<Object> {
+    return this.httpClient.put(`${this.departmentBaseURL}`, department);
   }
 
   deleteDepartment(id: number):Observable<Object>{
