@@ -60,4 +60,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         log.info("Department deleted successfully.");
         departmentRepository.deleteById(depId);
     }
+
+    @Override
+    public Department getDepartment(Integer id) {
+        return departmentRepository.getDepartmentById(id);
+    }
 }

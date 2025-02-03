@@ -24,14 +24,15 @@ export class UpdateDepartmentComponent implements OnInit{
   }
 
   loadDepartment() {
-    this.departmentService.getDepartmentsList().subscribe(
-      data => {
-        if (data.length > 0) {
-          this.department = data[0];
-        }
-      },
-      error => console.log(error)
-    );
+    const departmentId = this.route.snapshot.paramMap.get('id');
+    if (departmentId) {
+      this.departmentService.getDepartmentById(departmentId).subscribe(
+        data => {
+          this.department = data;
+        },
+        error => console.log(error)
+      );
+    }
   }
 
   onSubmit() {

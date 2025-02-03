@@ -13,7 +13,9 @@ const routes: Routes = [
   {path:'department',component: DepartmentListComponent},
   {path:'create-department',component: CreateDepartmentComponent},
   {path:'update-employee',component: UpdateEmployeeComponent},
+  {path:'update-employee/:id',component: UpdateEmployeeComponent},
   {path:'update-department',component: UpdateDepartmentComponent},
+  {path:'update-department/:id',component: UpdateDepartmentComponent},
   {path:'',redirectTo:'employee',pathMatch:'full'}
 ];
 

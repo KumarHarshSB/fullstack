@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Department} from "./department";
-import {Employee} from "./employee";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +13,10 @@ export class DepartmentService {
 
   getDepartmentsList(): Observable<Department[]>{
     return this.httpClient.get<Department[]>(`${this.departmentBaseURL}`);
+  }
+
+  getDepartmentById(id: string) {
+    return this.httpClient.get<Department>(`${this.departmentBaseURL}/${id}`);
   }
 
   createDepartment(department: Department): Observable<Object>{

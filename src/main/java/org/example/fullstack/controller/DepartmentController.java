@@ -26,6 +26,11 @@ public class DepartmentController {
         return departmentService.readDepartment();
     }
 
+    @GetMapping("/{id}")
+    public Department getDepartmentById(@PathVariable Integer id){
+        return departmentService.getDepartment(id);
+    }
+
     @PutMapping()
     public Department updateDepartment(@RequestBody Department department){
         return departmentService.updateDepartment(department);

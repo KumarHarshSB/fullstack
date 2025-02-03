@@ -24,8 +24,8 @@ export class DepartmentListComponent {
     })
   }
 
-  updateDepartment(){
-    this.router.navigate(['update-department']);
+  updateDepartment(department: Department) {
+    this.router.navigate(['update-department', department.id]);
   }
 
   deleteDepartment(id: number){

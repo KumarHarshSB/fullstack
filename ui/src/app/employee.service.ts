@@ -18,6 +18,10 @@ export class EmployeeService {
     return this.httpClient.get<Employee[]>(`${this.baseURL}`);
   }
 
+  getEmployeeById(id: string) {
+    return this.httpClient.get<Employee>(`${this.baseURL}/${id}`);
+  }
+
   createEmployee(employee: any): any{
     return this.httpClient.post(`${this.baseURL}`,employee);
   }

@@ -12,4 +12,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     List<Department> findAllByMandatoryTrue();
 
     Optional<Object> findByName(String name);
+
+    Department getDepartmentById(Integer id);
 }

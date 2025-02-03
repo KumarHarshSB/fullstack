@@ -26,14 +26,15 @@ export class UpdateEmployeeComponent implements OnInit {
   }
 
   loadEmployee() {
-    this.employeeService.getEmployeesList().subscribe(
-      data => {
-        if (data.length > 0) {
-          this.employee = data[0];
-        }
-      },
-      error => console.log(error)
-    );
+    const employeeId = this.route.snapshot.paramMap.get('id');
+    if (employeeId) {
+      this.employeeService.getEmployeeById(employeeId).subscribe(
+        data => {
+          this.employee = data;
+        },
+        error => console.log(error)
+      );
+    }
   }
 
   loadDepartments() {

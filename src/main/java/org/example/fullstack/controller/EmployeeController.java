@@ -1,5 +1,6 @@
 package org.example.fullstack.controller;
 
+import org.example.fullstack.model.Department;
 import org.example.fullstack.model.Employee;
 import org.example.fullstack.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ public class EmployeeController {
     @GetMapping
     public List<Employee> readEmployee(){
         return employeeService.readEmployee();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable Integer id){
+        return employeeService.getEmployee(id);
     }
 
     @PutMapping()
