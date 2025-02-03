@@ -1,5 +1,5 @@
 <div class="col-md-6 offset-md-3">
-  <h3>Create Employee</h3>
+  <h3>Update Employee</h3>
   <form (ngSubmit) = "onSubmit()">
 
     <div class="form-group">
@@ -17,9 +17,7 @@
     <div class="form-group">
       <label>Departments</label>
       <select class="form-control" multiple [(ngModel)]="employee.departmentList" name="departments">
-        <option *ngFor="let department of departments" [ngValue]="department"
-                [selected]="department.mandatory"
-                [disabled]="department.mandatory">{{ department.name }}</option>
+        <option *ngFor="let department of departments" [ngValue]="department">{{ department.name }}</option>
       </select>
     </div>
 

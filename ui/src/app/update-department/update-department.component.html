@@ -1,0 +1,25 @@
+<div class="col-md-6 offset-md-3">
+  <h3>Update Department</h3>
+  <form (ngSubmit) = "onSubmit()">
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="department.name" id="name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label>Read Only</label>
+      <input type="checkbox" checked class="form-check-label"
+             [(ngModel)]="department.readOnly" id="readOnly" name="readOnly">
+    </div>
+
+    <div class="form-group">
+      <label>Mandatory</label>
+      <input type="checkbox" checked class="form-check"
+             [(ngModel)]="department.mandatory" id="mandatory" name="mandatory">
+    </div>
+
+    <button class="btn btn-success" type="submit">Submit</button>
+  </form>
+</div>

@@ -25,14 +25,12 @@ export class CreateEmployeeComponent implements OnInit{
     this.employeeService.getDepartmentList().subscribe(
       data => {
         this.departments = data;
-        console.log('department:', data);
       },
       (error: any) => console.log(error)
     );
   }
 
   saveEmployee() {
-    console.log('saving employee: ',this.employee.departmentList);
     const employeeData = {
       name: this.employee.name,
       email: this.employee.email,
@@ -46,7 +44,6 @@ export class CreateEmployeeComponent implements OnInit{
 
     this.employeeService.createEmployee(employeeData).subscribe(
         (data: any) => {
-        console.log(data);
         this.goToEmployeeList();
       },
       (error: any) => console.log(error)
