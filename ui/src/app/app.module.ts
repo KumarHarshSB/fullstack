@@ -9,6 +9,7 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
 import {FormsModule} from "@angular/forms";
 import { DepartmentListComponent } from './department-list/department-list.component';
 import { CreateDepartmentComponent } from './create-department/create-department.component';
+import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CreateDepartmentComponent } from './create-department/create-department
     EmployeeListComponent,
     CreateEmployeeComponent,
     DepartmentListComponent,
-    CreateDepartmentComponent
+    CreateDepartmentComponent,
+    UpdateEmployeeComponent
   ],
   imports: [
     BrowserModule,

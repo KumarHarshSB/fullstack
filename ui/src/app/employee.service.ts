@@ -26,6 +26,10 @@ export class EmployeeService {
     return this.httpClient.get<Department[]>(`${this.departmentBaseURL}`)
   }
 
+  updateEmployee(employee: Employee): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}`, employee); // No ID in URL
+  }
+
   deleteEmployee(id: number):Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}/${id}`);
   }
