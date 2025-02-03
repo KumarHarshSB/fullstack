@@ -17,7 +17,9 @@
     <div class="form-group">
       <label>Departments</label>
       <select class="form-control" multiple [(ngModel)]="employee.departmentList" name="departments">
-        <option *ngFor="let department of departments" [ngValue]="department">{{ department.name }}</option>
+        <option *ngFor="let department of departments" [ngValue]="department"
+                [selected]="department.mandatory"
+                [disabled]="department.mandatory">>{{ department.name }}</option>
       </select>
     </div>
 

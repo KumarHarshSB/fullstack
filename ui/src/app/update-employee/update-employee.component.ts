@@ -40,6 +40,13 @@ export class UpdateEmployeeComponent implements OnInit {
     this.employeeService.getDepartmentList().subscribe(
       data => {
         this.departments = data;
+
+        const mandatoryDepartments = data.filter(dept => dept.mandatory);
+        mandatoryDepartments.forEach(mandatoryDept => {
+          if (!this.employee.departmentList.some(empDept => empDept.name === mandatoryDept.name)) {
+            this.employee.departmentList.push(mandatoryDept);
+          }
+        });
       },
       error => console.log(error)
     );
