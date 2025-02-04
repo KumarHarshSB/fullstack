@@ -31,14 +31,21 @@ export class CreateEmployeeComponent implements OnInit{
   }
 
   saveEmployee() {
+    const selectedDepartments = new Set(this.employee.departmentList);
+    this.departments.forEach(dept => {
+      if (dept.mandatory) {
+        selectedDepartments.add(dept);
+      }
+    });
+
     const employeeData = {
       name: this.employee.name,
       email: this.employee.email,
-      departmentList: (this.employee.departmentList ?? []).map(dept => ({
+      departmentList: Array.from(selectedDepartments).map(dept => ({
         name: dept.name,
         readOnly: dept.readOnly,
         mandatory: dept.mandatory,
-        empList: []
+        empList: dept.employeeList
       }))
     };
 
@@ -55,7 +62,6 @@ export class CreateEmployeeComponent implements OnInit{
   }
 
   onSubmit(){
-    console.log('submit', this.employee.departmentList);
     this.saveEmployee();
   }
 }
