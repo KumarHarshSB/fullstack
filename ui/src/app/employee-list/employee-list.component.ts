@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {Employee} from "../employee";
 import {EmployeeService} from "../employee.service";
 import {Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateEmployeeComponent} from "../update-employee/update-employee.component";
 
 @Component({
   selector: 'app-employee-list',
@@ -12,7 +14,8 @@ export class EmployeeListComponent {
   employees!: Employee[];
 
   constructor(private employeeService: EmployeeService,
-              private router: Router) {}
+              private router: Router,
+              private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.getEmployees();
@@ -24,8 +27,20 @@ export class EmployeeListComponent {
     })
   }
 
-  updateEmployee(employee: Employee){
-    this.router.navigate(['update-employee',employee.id]);
+  // updateEmployee(employee: Employee){
+  //   this.router.navigate(['update-employee',employee.id]);
+  // }
+
+  openUpdateModal(employee: Employee) {
+    const modalRef = this.modalService.open(UpdateEmployeeComponent, { size: 'lg' });
+    modalRef.componentInstance.employee = { ...employee };
+
+    modalRef.result.then(
+      (updated) => {
+        if (updated) this.getEmployees(); // Refresh employee list after update
+      },
+      () => {}
+    );
   }
 
   deleteEmployee(id: number){

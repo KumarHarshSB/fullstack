@@ -12,7 +12,8 @@
       <td>{{employee.name}}</td>
       <td>{{employee.email}}</td>
       <td>
-        <button (click) = "updateEmployee(employee)" class="btn btn-info">Update</button>
+<!--        <button (click) = "updateEmployee(employee)" class="btn btn-info">-->
+        <button (click)="openUpdateModal(employee)" class="btn btn-info">Update</button>
       </td>
       <td>
         <button (click) = "deleteEmployee(employee.id!)" class="btn btn-danger">Delete</button>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Employee} from "../employee";
 import {Department} from "../department";
 import {EmployeeService} from "../employee.service";
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -10,31 +11,48 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./update-employee.component.css']
 })
 export class UpdateEmployeeComponent implements OnInit {
-  employee: Employee = {
+  @Input() employee: Employee = {
     id: undefined,
     name: '',
     email: '',
     departmentList: []
   };
   departments: Department[] = [];
+  //
+  // constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private router: Router) {}
+  //
+  // ngOnInit(): void {
+  //   this.loadEmployee();
+  //   this.loadDepartments();
+  // }
+  //
+  // loadEmployee() {
+  //   const employeeId = this.route.snapshot.paramMap.get('id');
+  //   if (employeeId) {
+  //     this.employeeService.getEmployeeById(employeeId).subscribe(
+  //       data => {
+  //         this.employee = data;
+  //       },
+  //       error => console.log(error)
+  //     );
+  //   }
+  // }
 
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private router: Router) {}
+  // employee: Employee;
+
+  constructor(
+    private employeeService: EmployeeService,
+    public activeModal: NgbActiveModal
+  ) {}
 
   ngOnInit(): void {
-    this.loadEmployee();
     this.loadDepartments();
   }
 
-  loadEmployee() {
-    const employeeId = this.route.snapshot.paramMap.get('id');
-    if (employeeId) {
-      this.employeeService.getEmployeeById(employeeId).subscribe(
-        data => {
-          this.employee = data;
-        },
-        error => console.log(error)
-      );
-    }
+  onSubmit() {
+    this.employeeService.updateEmployee(this.employee).subscribe(() => {
+      this.activeModal.close(true);
+    });
   }
 
   loadDepartments() {
@@ -53,11 +71,11 @@ export class UpdateEmployeeComponent implements OnInit {
     );
   }
 
-  onSubmit() {
-    this.employeeService.updateEmployee(this.employee).subscribe(
-      () => this.router.navigate(['/employee']),
-      error => console.log(error)
-    );
-  }
+  // onSubmit() {
+  //   this.employeeService.updateEmployee(this.employee).subscribe(
+  //     () => this.router.navigate(['/employee']),
+  //     error => console.log(error)
+  //   );
+  // }
 }
 
