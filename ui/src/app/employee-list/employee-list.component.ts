@@ -28,10 +28,6 @@ export class EmployeeListComponent {
     })
   }
 
-  // updateEmployee(employee: Employee){
-  //   this.router.navigate(['update-employee',employee.id]);
-  // }
-
   openUpdateModal(employee: Employee) {
     const modalRef = this.modalService.open(UpdateEmployeeComponent, { size: 'lg' });
     modalRef.componentInstance.employee = { ...employee };

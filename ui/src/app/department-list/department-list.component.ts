@@ -27,10 +27,6 @@ export class DepartmentListComponent {
     })
   }
 
-  // updateDepartment(department: Department) {
-  //   this.router.navigate(['update-department', department.id]);
-  // }
-
   openUpdateModal(department: Department) {
     const modalRef = this.modalService.open(UpdateDepartmentComponent, { backdrop: true });
     modalRef.componentInstance.department = { ...department };
