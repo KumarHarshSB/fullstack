@@ -1,6 +1,7 @@
 package org.example.fullstack.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +15,6 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +24,6 @@ public class Department {
     private Boolean mandatory;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departmentList")
+    @JsonIgnore
     private Set<Employee> employeeList = new HashSet<>();
 }
