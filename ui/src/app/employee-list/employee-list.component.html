@@ -13,10 +13,8 @@
       <td>{{employee.name}}</td>
       <td>{{employee.email}}</td>
       <td>
-        <button (click)="openUpdateModal(employee)" class="btn btn-info">Update</button>
-      </td>
-      <td>
-        <button (click) = "deleteEmployee(employee.id!)" class="btn btn-danger">Delete</button>
+        <button (click)="openUpdateModal(employee)" class="btn btn-info"><img src="assets/pencil.svg"></button>
+        <button (click) = "deleteEmployee(employee.id!)" class="btn btn-danger"><img src="assets/trash-fill.svg"></button>
       </td>
     </tr>
   </tbody>

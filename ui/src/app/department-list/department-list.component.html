@@ -15,10 +15,8 @@
     <td>{{department.readOnly}}</td>
     <td>{{department.mandatory}}</td>
     <td>
-      <button (click)="openUpdateModal(department)" class="btn btn-info">Update</button>
-    </td>
-    <td>
-      <button [disabled]="department.readOnly" (click) = "deleteDepartment(department.id!)" class="btn btn-danger">Delete</button>
+      <button (click)="openUpdateModal(department)" class="btn btn-info"><img src="assets/pencil.svg"></button>
+      <button [disabled]="department.readOnly" (click) = "deleteDepartment(department.id!)" class="btn btn-danger"><img src="assets/trash-fill.svg"></button>
     </td>
   </tr>
   </tbody>
